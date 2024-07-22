@@ -10,15 +10,14 @@ type ChatContext = {
     addMessage: (user: string, text: string) => void;
     removeMessage: (id: number) => void;
     editMessage: (id: number, newText: string) => void;
-    clearChat: () => void; // Adicionando a função para limpar o chat
+    clearChat: () => void; 
 }
 
 export const ChatContext = createContext<ChatContext | null>(null);
 
 export function ChatProvider({ children }: { children: ReactNode }) {
     const [chat, dispatch] = useReducer(chatReducer, JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'));
-    const user = useUser(); // Obtenha o estado do usuário
-
+    const user = useUser(); 
     const addMessage = (user: string, text: string) => {
         dispatch({
             type: 'add',
