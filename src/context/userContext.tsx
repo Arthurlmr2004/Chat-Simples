@@ -10,10 +10,21 @@ type UserContext = {
 export const userContext = createContext<UserContext | null>(null);
 
 export function UserProvider({ children }: { children: ReactNode }) {
-    const [user, setUser] = useState(localStorage?.getItem(STORAGE_KEY) || '');
+    const [user, setUser] = useState('');
 
     useEffect(() => {
-        localStorage.setItem(STORAGE_KEY, user);
+        if (typeof window !== 'undefined') {
+            const storedUser = localStorage.getItem(STORAGE_KEY);
+            if (storedUser) {
+                setUser(storedUser);
+            }
+        }
+    }, []);
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            localStorage.setItem(STORAGE_KEY, user);
+        }
     }, [user]);
 
     return (

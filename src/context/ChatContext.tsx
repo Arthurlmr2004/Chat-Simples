@@ -1,7 +1,6 @@
 import { chatReducer } from "@/reducers/chatReducer";
 import { Message } from "@/types/Message";
 import { createContext, ReactNode, useContext, useEffect, useReducer } from "react";
-import { useUser } from "./userContext";
 
 const STORAGE_KEY = 'chatContextContent';
 
@@ -16,8 +15,25 @@ type ChatContext = {
 export const ChatContext = createContext<ChatContext | null>(null);
 
 export function ChatProvider({ children }: { children: ReactNode }) {
-    const [chat, dispatch] = useReducer(chatReducer, JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'));
-    const user = useUser(); 
+    const [chat, dispatch] = useReducer(chatReducer, []);
+
+    useEffect(() => {
+        // Carregar mensagens do localStorage
+        if (typeof window !== 'undefined') {
+            const storedChat = localStorage.getItem(STORAGE_KEY);
+            if (storedChat) {
+                dispatch({ type: 'initialize', payload: JSON.parse(storedChat) });
+            }
+        }
+    }, []);
+
+    useEffect(() => {
+        // Salvar as mensagens no localStorage
+        if (typeof window !== 'undefined') {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(chat));
+        }
+    }, [chat]);
+
     const addMessage = (user: string, text: string) => {
         dispatch({
             type: 'add',
@@ -41,12 +57,10 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 
     const clearChat = () => {
         dispatch({ type: 'clear' });
-        localStorage.removeItem(STORAGE_KEY);
+        if (typeof window !== 'undefined') {
+            localStorage.removeItem(STORAGE_KEY);
+        }
     };
-
-    useEffect(() => {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(chat));
-    }, [chat]);
 
     return (
         <ChatContext.Provider value={{ chat, addMessage, removeMessage, editMessage, clearChat }}>

@@ -16,7 +16,7 @@ type RemoveAction = {
 }
 
 type EditAction = {
-    type: 'edit',
+    type: 'edit';
     payload: {
         id: number;
         newText: string;
@@ -27,8 +27,14 @@ type ClearAction = {
     type: 'clear';
 }
 
-type ChatActions = AddAction | RemoveAction | EditAction | ClearAction;
-export const chatReducer = (state: Message[], action: ChatActions) => {
+type InitializeAction = {
+    type: 'initialize';
+    payload: Message[];
+}
+
+type ChatActions = AddAction | RemoveAction | EditAction | ClearAction | InitializeAction;
+
+export const chatReducer = (state: Message[], action: ChatActions): Message[] => {
     switch (action.type) {
         case 'add':
             return [...state, {
@@ -44,10 +50,13 @@ export const chatReducer = (state: Message[], action: ChatActions) => {
             return state.map(event => {
                 if (event.id === action.payload.id) event.text = action.payload.newText;
                 return event;
-            })
-            
+            });
+
         case 'clear':
             return [];
+
+        case 'initialize':
+            return action.payload;
 
         default:
             return state;

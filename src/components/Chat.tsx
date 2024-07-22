@@ -20,14 +20,15 @@ export function Chat() {
         }
     }, [userCtx]);
 
-    if (!userCtx || isLoggedOut) return <NameInput />
-
-    function handleLogout() {
-        localStorage.removeItem(STORAGE_KEY_CHAT);
-        localStorage.removeItem(STORAGE_KEY_USER);
+    const handleLogout = () => {
+        if (typeof window !== 'undefined') {
+            localStorage.removeItem(STORAGE_KEY_CHAT);
+            localStorage.removeItem(STORAGE_KEY_USER);
+        }
         userCtx?.setUser('');
-    }
+    };
 
+    if (!userCtx || isLoggedOut) return <NameInput />
 
     return (
         <>
