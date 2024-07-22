@@ -27,3 +27,20 @@ O projeto foi desenvolvido utilizando:
 1. Clone o repositório:
    ```bash
    git clone https://github.com/Arthurlmr2004/Chat-Simples.git
+   ```
+   
+2. Instale as dependências:
+    ```bash
+    npm install ou npm i
+    ```
+
+3. Inicie o servidor de desenvolvimento:
+    ```bash
+    npm run dev
+    ```
+
+## Contribuição
+
+Se você quiser contribuir com este projeto, sinta-se à vontade para abrir issues e pull requests. Todas as contribuições são bem-vindas!
+
+Desenvolvido por [Arthur](https://github.com/arthurlmr2004)
