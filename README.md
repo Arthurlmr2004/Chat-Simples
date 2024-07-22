@@ -24,23 +24,34 @@ O projeto foi desenvolvido utilizando:
 
 ## Instalação
 
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/Arthurlmr2004/Chat-Simples.git
-   ```
-   
-2. Instale as dependências:
+Para rodar o projeto localmente, siga os seguintes passos:
+
+1. **Clone o repositório:**
     ```bash
-    npm install ou npm i
+    git clone https://github.com/Arthurlmr2004/Chat-Simples.git
     ```
 
-3. Inicie o servidor de desenvolvimento:
+2. **Instale as dependências:**
+    ```bash
+    npm install
+    ```
+
+3. **Inicie o servidor de desenvolvimento:**
     ```bash
     npm run dev
     ```
 
+4. **Acesse o chat simples:**
+    Navegue até `http://localhost:3000` em seu navegador.
+
+## Acesso Online
+
+Você pode acessar a versão hospedada do chat através do link: [Chat Simples](https://chat-simples.vercel.app)
+
 ## Contribuição
 
 Se você quiser contribuir com este projeto, sinta-se à vontade para abrir issues e pull requests. Todas as contribuições são bem-vindas!
+
+## Desenvolvedor
 
 Desenvolvido por [Arthur](https://github.com/arthurlmr2004)
