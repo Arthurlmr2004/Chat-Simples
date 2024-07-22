@@ -105,7 +105,7 @@ export function ChatMessages() {
                         <textarea
                             value={newText}
                             onChange={(e) => setNewText(e.target.value)}
-                            className="w-full p-2 border border-gray-300 rounded-md"
+                            className="w-full p-2 border border-gray-300 rounded-md text-black"
                             rows={4}
                         />
                         <div className="flex justify-end mt-2">
